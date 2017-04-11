@@ -26,6 +26,7 @@ namespace Managers
             Global.Instance.PortalManager.SetPortalActiveByMove();
             //移動関数を呼ぶ
             PlayerController.Instance.MoveTo(port.GetSelectingPortal().GetPortalPosition());
+            Global.Instance.SoundManager.PlayWarpSE();
         }
     }
 }

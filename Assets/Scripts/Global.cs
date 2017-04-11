@@ -60,5 +60,17 @@ public class Global : SingletonClass<Global>
         }
     }
 
+    SoundManager soundManager;
+    public SoundManager SoundManager
+    {
+        get
+        {
+            if(soundManager == null){
+                soundManager = SoundManager.Instance;
+            }
+            return soundManager;
+        }
+    }
+
 
 }
