@@ -10,8 +10,8 @@ namespace Player
         Camera camera;
 
         const string PORTAL = "portal";
-        const float rayLength = 200f;
-        const float hitTrueTime = 3f;
+        const float rayLength = 1000f;
+        const float hitTrueTime = 0.5f;
 
         Ray ray;
         RaycastHit hit;
