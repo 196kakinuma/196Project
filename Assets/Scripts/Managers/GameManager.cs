@@ -12,6 +12,8 @@ namespace Managers
         PlayerManager playerPref;
 
         PlayerManager player;
+
+        
         // Use this for initialization
         void Start()
         {

@@ -45,6 +45,7 @@ namespace Managers
 
         public void ClearPortalSelect()
         {
+            if (selectPortalNum == NOTSELECT) return;
             portalDict[selectPortalNum].ClearSelected();
             selectPortalNum = NOTSELECT;
         }
