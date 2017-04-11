@@ -26,5 +26,10 @@ namespace Portal
         {
             material.color = Color.blue;
         }
+
+        public Vector3 GetPortalPosition()
+        {
+            return this.transform.parent.transform.position;
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace Managers
             //ポータルのActiveを変更
             Global.Instance.PortalManager.SetPortalActiveByMove();
             //移動関数を呼ぶ
-            PlayerController.Instance.MoveTo(port.GetSelectingPortal().transform.position);
+            PlayerController.Instance.MoveTo(port.GetSelectingPortal().GetPortalPosition());
         }
     }
 }
