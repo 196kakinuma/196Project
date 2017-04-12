@@ -25,7 +25,7 @@ namespace Managers
         // Update is called once per frame
         void Update()
         {
-
+            Global.Instance.SoundManager.CtrlEnvSound(player.transform.position.y);
         }
     }
 }

@@ -17,6 +17,6 @@ public class Settings : SingletonMonoBehaviour<Settings>{
 	
     // Update is called once per frame
     void Update () {
-		
+	    	
     }
 }

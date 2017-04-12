@@ -7,12 +7,17 @@ namespace Player
     public class SightRaycast : MonoBehaviour
     {
         [SerializeField]
+        bool raycastDebug = false;
+        [SerializeField]
         Camera camera;
 
         const string PORTAL = "portal";
         [SerializeField]
-        const float rayLength = 2000f;
+        const float rayLength = 1000f;
+        [SerializeField]
         const float hitTrueTime = 0.5f;
+        [SerializeField]
+        float rayRadious = 1f;
 
         Ray ray;
         RaycastHit hit;
@@ -32,10 +37,12 @@ namespace Player
             RaycastForward();
         }
 
+
         public void RaycastForward()
         {
             ray = new Ray(camera.transform.position, transform.TransformDirection(camera.transform.forward) * 200);
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, rayLength))
+            //if (Physics.Raycast(ray.origin, ray.direction, out hit, rayLength))
+            if(Physics.SphereCast(ray,rayRadious,out hit,rayLength))
             {
                 if (hit.collider.tag == PORTAL)
                 {
@@ -54,11 +61,14 @@ namespace Player
                 {
                     Global.Instance.PortalManager.SetSelectPortalNum(hitPortalNum);
                 }
+
+                if (raycastDebug)
+                {
+                    Debug.Log(hit.collider.name);
+                    OnDrawGizmos();
+                }
             }
 
-#if UNITY_EDITOR
-            Debug.DrawRay(ray.origin, ray.direction, Color.red);
-#endif
 
         }
 
@@ -78,6 +88,17 @@ namespace Player
             {
                 hitTime += Time.deltaTime;
             }
+        }
+
+        /// <summary>
+        /// なんかえらーが出るが一応可視化することが可能
+        /// </summary>
+        void OnDrawGizmos()
+        {
+
+            Gizmos.DrawRay(camera.transform.position, camera.transform.forward * hit.distance);
+            Gizmos.DrawWireSphere(camera.transform.position + camera.transform.forward * (hit.distance), rayRadious);
+
         }
 
     }
