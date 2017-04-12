@@ -44,17 +44,6 @@ namespace Player
             //if (Physics.Raycast(ray.origin, ray.direction, out hit, rayLength))
             if(Physics.SphereCast(ray,rayRadious,out hit,rayLength))
             {
-                if (hit.collider.tag == PORTAL)
-                {
-                    HitManage();
-                }
-                else if (hitting)
-                {
-                    hitting = false;
-                    hitTime = 0f;
-                    hitPortalNum = -1;
-                    Global.Instance.PortalManager.ClearPortalSelect();
-                }
 
                 //指定時間以上レイを当てたら
                 if (hitTime >= hitTrueTime)
@@ -62,27 +51,43 @@ namespace Player
                     Global.Instance.PortalManager.SetSelectPortalNum(hitPortalNum);
                 }
 
+                if (hit.collider.tag == PORTAL)
+                {
+                    HitManage();
+                }
+
+
                 if (raycastDebug)
                 {
                     Debug.Log(hit.collider.name);
                     OnDrawGizmos();
                 }
             }
+            else
+            {
+                hitting = false;
+                hitTime = 0f;
+                hitPortalNum = -1;
+                Global.Instance.PortalManager.ClearPortalSelect();
+            }
 
 
         }
 
+        int correntWatchPortal = -1;
         /// <summary>
         /// raycastがportalに反応している時に呼ばれる。
         /// カウントなどをおこなう
         /// </summary>
         void HitManage()
         {
-            if (!hitting)
+            correntWatchPortal = hit.collider.GetComponent<Portal.Portal>().portalNum;
+            if (!hitting || hitPortalNum!=correntWatchPortal)
             {
                 hitting = true;
                 hitTime = 0f;
-                hitPortalNum = hit.collider.GetComponent<Portal.Portal>().portalNum;
+                hitPortalNum = correntWatchPortal;
+                Global.Instance.PortalManager.ClearPortalSelect();
             }
             else
             {

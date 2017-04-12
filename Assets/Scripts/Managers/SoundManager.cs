@@ -9,9 +9,12 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
     AudioSource envSound;
     [SerializeField]
     AudioSource warpSE;
+    [SerializeField]
+    AudioSource windSound;
 	// Use this for initialization
 	void Start () {
         envSound.Play();
+        windSound.Play();
     }
 	
 	// Update is called once per frame
@@ -25,19 +28,26 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
     }
 
 
-    [SerializeField]
-    float limitheight = 60;
+    float thresholdHeight = 50;
     private float beforeHeight=-1; 
     /// <summary>
-    /// キャラクターのいる高さによって環境音の大きさを変更する
+    /// キャラクターのいる高さによって環境音の大きさ,サウンドそのものを変更する
     /// </summary>
     /// <param name="height">プレイヤーのいる高さy</param>
     public void CtrlEnvSound(float height)
     {
         if (beforeHeight == height) return;
-        if (height > limitheight) height = limitheight;
-        envSound.volume =(Mathf.Cos( (height / limitheight)*Mathf.PI/2));
+        beforeHeight = height;
 
-       
+
+
+        if (height > thresholdHeight)
+        {
+            height = thresholdHeight - 0.5f;
+            
+        }
+        envSound.volume =1 - (height/thresholdHeight);
+        windSound.volume= (height / thresholdHeight)-0.1f;
+
     }
 }

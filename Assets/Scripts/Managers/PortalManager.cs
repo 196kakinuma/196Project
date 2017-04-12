@@ -88,6 +88,7 @@ namespace Managers
         {
             portalDict[nowPortalNum].gameObject.SetActive(true);
             portalDict[selectPortalNum].gameObject.SetActive(false);
+            nowPortalNum = selectPortalNum;
         }
 
         public void SetPortalActiveByFirst()
