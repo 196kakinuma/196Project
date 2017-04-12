@@ -40,7 +40,7 @@ public class Global : SingletonClass<Global>
         {
             if (moveManager == null)
             {
-                moveManager = new MoveManager();
+                moveManager = MoveManager.Instance;
             }
             return moveManager;
         }
@@ -69,6 +69,19 @@ public class Global : SingletonClass<Global>
                 soundManager = SoundManager.Instance;
             }
             return soundManager;
+        }
+    }
+
+    ParticleManager particleManager;
+    public ParticleManager ParticleManager
+    {
+        get
+        {
+            if(particleManager == null)
+            {
+                particleManager = ParticleManager.Instance;
+            }
+            return particleManager;
         }
     }
 

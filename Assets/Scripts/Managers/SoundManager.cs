@@ -11,6 +11,8 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
     AudioSource warpSE;
     [SerializeField]
     AudioSource windSound;
+    [SerializeField]
+    AudioSource beforeWarp;
 	// Use this for initialization
 	void Start () {
         envSound.Play();
@@ -25,6 +27,11 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
     public void PlayWarpSE()
     {
         warpSE.Play();
+    }
+
+    public void PlayBeforeWarpSE()
+    {
+        beforeWarp.Play();
     }
 
 

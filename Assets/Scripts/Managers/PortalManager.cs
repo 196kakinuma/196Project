@@ -15,6 +15,7 @@ namespace Managers
         [SerializeField]
         int firstPortalNum = 0;
         int nowPortalNum; //現在いるポータルの番号
+        int decidedMovePortalNum = -1;
 
         // Use this for initialization
         void Start()
@@ -87,8 +88,8 @@ namespace Managers
         public void SetPortalActiveByMove()
         {
             portalDict[nowPortalNum].gameObject.SetActive(true);
-            portalDict[selectPortalNum].gameObject.SetActive(false);
-            nowPortalNum = selectPortalNum;
+            portalDict[decidedMovePortalNum].gameObject.SetActive(false);
+            nowPortalNum = decidedMovePortalNum;
         }
 
         public void SetPortalActiveByFirst()
@@ -108,6 +109,21 @@ namespace Managers
         public Portal.Portal GetSelectingPortal()
         {
             return portalDict[selectPortalNum];
+        }
+
+        /// <summary>
+        /// 移動先のポータルがエフェクト等の待ち時間時により変更されるのを防ぐ
+        /// 移動前に必ず呼ぶ事
+        /// それ以外では呼ばないこと
+        /// </summary>
+        public void HoldSelectPortal()
+        {
+            decidedMovePortalNum = selectPortalNum;
+        }
+
+        public Portal.Portal GetDecidedMovePortal()
+        {
+            return portalDict[decidedMovePortalNum];
         }
         #endregion
 
