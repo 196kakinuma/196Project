@@ -12,6 +12,8 @@ namespace Player
     public class PlayerController : SingletonMonoBehaviour<PlayerController>
     {
         SightRaycast caster;
+        [SerializeField]
+        Camera _camera;
         // Use this for initialization
         void Start()
         {
@@ -31,6 +33,15 @@ namespace Player
         public void MoveTo(Vector3 movePos)
         {
             this.transform.position = movePos;
+        }
+
+        /// <summary>
+        /// ワープ前の微妙にワープ先に近づく処理を行う
+        /// </summary>
+        public void ApproachTo(Vector3 movePos)
+        {
+            //movePos =  this.transform.position - movePos;
+            this.transform.position += _camera.transform.forward * Time.deltaTime; //movePos.normalized*Time.deltaTime;
         }
     }
 }

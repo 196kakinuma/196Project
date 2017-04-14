@@ -31,13 +31,14 @@ namespace Managers
             Global.Instance.ParticleManager.PlayWarpEffect();
             Global.Instance.SoundManager.PlayBeforeWarpSE();
 
-            yield return new WaitForSeconds(0.7f);
-            /*float time = 0;
-            for (float i=0; i < 0.7f;)
+            //yield return new WaitForSeconds(0.7f);
+            for (float time=0; time < 0.7f;)
             {
-
-                yield new return WaitForEndOfFrame();
-            }*/
+                Global.Instance.PlayerController.ApproachTo(port.transform.position);
+                time += Time.deltaTime;
+                Debug.Log("call co");
+                yield return new WaitForEndOfFrame();
+            }
 
             Global.Instance.SoundManager.PlayWarpSE();
             //ポータルのActiveを変更
