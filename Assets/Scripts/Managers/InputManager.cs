@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using IkLibrary;
 using System;
+using Player;
 
 namespace Managers
 {
@@ -20,23 +21,25 @@ namespace Managers
                 Debug.Log("button Pressed");
                 Global.Instance.MoveManager.Move();
             }
-            //DownKeyCheck();
-        }
 
-        void DownKeyCheck()
-        {
-            if (Input.anyKeyDown)
+            if (Input.GetKey(KeyCode.W))
             {
-                foreach (KeyCode code in Enum.GetValues(typeof(KeyCode)))
-                {
-                    if (Input.GetKeyDown(code))
-                    {
-                        //処理を書く
-                        Debug.Log(code);
-                        break;
-                    }
-                }
+                PlayerController.Instance.MoveForward();
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                PlayerController.Instance.MoveBack();
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                PlayerController.Instance.MoveLeft();
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                PlayerController.Instance.MoveRight();
             }
         }
+
+       
     }
 }

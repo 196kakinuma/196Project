@@ -47,10 +47,38 @@ namespace Player
 
 
 
+
         #region KeyBoardMove
+        Vector3 vectVer;
+        Vector3 vectHori;
+        [SerializeField]
+        float moveSpeed = 10;
         public void MoveForward()
         {
-            this.transform.position += transform.forward.normalized;
+            vectVer = _camera.transform.forward.normalized * Time.deltaTime * moveSpeed;
+            vectVer.y = 0;
+            this.transform.position += vectVer;
+        }
+
+        public void MoveRight()
+        {
+            vectHori = _camera.transform.right.normalized * Time.deltaTime * moveSpeed / 2;
+            vectHori.y = 0;
+            this.transform.position += vectHori;
+        }
+
+        public void MoveLeft()
+        {
+            vectHori = _camera.transform.right.normalized * Time.deltaTime * moveSpeed / 2;
+            vectHori.y = 0;
+            this.transform.position -= vectHori;
+        }
+
+        public void MoveBack()
+        {
+            vectVer = _camera.transform.forward.normalized * Time.deltaTime * moveSpeed/2.5f;
+            vectVer.y = 0;
+            this.transform.position -= vectVer;
         }
         #endregion
     }
