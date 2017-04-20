@@ -42,35 +42,38 @@ namespace Player
         {
             ray = new Ray(camera.transform.position, transform.TransformDirection(camera.transform.forward) * 200);
             //if (Physics.Raycast(ray.origin, ray.direction, out hit, rayLength))
-            if(Physics.SphereCast(ray,rayRadious,out hit,rayLength))
+
+            if (Application.loadedLevelName == "World")
             {
-
-                //指定時間以上レイを当てたら
-                if (hitTime >= hitTrueTime)
+                if (Physics.SphereCast(ray, rayRadious, out hit, rayLength))
                 {
-                    Global.Instance.PortalManager.SetSelectPortalNum(hitPortalNum);
+
+                    //指定時間以上レイを当てたら
+                    if (hitTime >= hitTrueTime)
+                    {
+                        Global.Instance.PortalManager.SetSelectPortalNum(hitPortalNum);
+                    }
+
+                    if (hit.collider.tag == PORTAL)
+                    {
+                        HitManage();
+                    }
+
+
+                    if (raycastDebug)
+                    {
+                        Debug.Log(hit.collider.name);
+                        OnDrawGizmos();
+                    }
                 }
-
-                if (hit.collider.tag == PORTAL)
+                else
                 {
-                    HitManage();
-                }
-
-
-                if (raycastDebug)
-                {
-                    Debug.Log(hit.collider.name);
-                    OnDrawGizmos();
+                    hitting = false;
+                    hitTime = 0f;
+                    hitPortalNum = -1;
+                    Global.Instance.PortalManager.ClearPortalSelect();
                 }
             }
-            else
-            {
-                hitting = false;
-                hitTime = 0f;
-                hitPortalNum = -1;
-                Global.Instance.PortalManager.ClearPortalSelect();
-            }
-
 
         }
 

@@ -17,6 +17,7 @@ namespace Player
         // Use this for initialization
         void Start()
         {
+            _camera = Camera.main;
             caster = this.GetComponent<SightRaycast>();
         }
 
@@ -43,5 +44,14 @@ namespace Player
             //movePos =  this.transform.position - movePos;
             this.transform.position += _camera.transform.forward * Time.deltaTime; //movePos.normalized*Time.deltaTime;
         }
+
+
+
+        #region KeyBoardMove
+        public void MoveForward()
+        {
+            this.transform.position += transform.forward.normalized;
+        }
+        #endregion
     }
 }
